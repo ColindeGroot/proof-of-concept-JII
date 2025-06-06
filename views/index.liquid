@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Experiments</title>
+  </head>
+  <body>
+    <h1>Experiments overview</h1>
+
+    {% if experiments and experiments.size > 0 %} 
+      <ul>
+        {% for experiment in experiments %}
+          <li>{{ experiment.name }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No projects found!</p>
+    {% endif %}
+  </body>
+</html>
