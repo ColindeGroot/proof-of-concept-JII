@@ -21,13 +21,34 @@ app.get('/', async (request, res) => {
     }
     catch (error){
         console.error(error)
-        res.status(500).send("Something wrong happend!")
+        res.status(500).send(error)
     }
 });
 
 
+app.get('/experiment/:id', async (req, res) => {
+  try {
+ 
+    const experimentId = req.params.id;
+
+  
+    const homeResponse = await fetch(`https://open-jii-api-mock.onrender.com/api/v1/experiments/${experimentId}`);
+    if (!homeResponse.ok) {
+      return res.status(homeResponse.status).send("Experiment niet gevonden");
+    }
+
+    const experimentData = await homeResponse.json();
+
+    res.render('experiment', { experiment: experimentData });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Er ging iets mis bij het ophalen van het experiment.");
+  }
+});
+
+
 // Stel de poort in
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8001;
 
 // Start de server
 app.listen(PORT, () => {
