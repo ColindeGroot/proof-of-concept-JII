@@ -1,20 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Experiments</title>
-  </head>
-  <body>
-    <h1>Experiments overview</h1>
+{% render 'partials/header.liquid' %}
 
-    {% if experiments and experiments.size > 0 %} 
+<body>
+
+  <h1>Experiments overview</h1>
+
+  <div>
+    <h2>Filter option</h2>
+    <details>
+      <summary>Filter options</summary>
       <ul>
-        {% for experiment in experiments %}
-          <li>{{ experiment.name }}</li>
-        {% endfor %}
+        <li>filter option</li>
+        <li>filter option</li>
+        <li>filter option</li>
       </ul>
-    {% else %}
-      <p>No projects found!</p>
-    {% endif %}
-  </body>
-</html>
+    </details>
+  </div>
+
+  {% if experiments and experiments.size > 0 %}
+  <ul class="experiment-board">
+    {% for experiment in experiments %}
+
+    <li class="experiment">
+      <h3>{{ experiment.name }}</h3>
+      <p>{{ experiment.description | truncate:'60' }}</p>
+    </li>
+
+    {% endfor %}
+  </ul>
+
+  {% else %}
+
+  <p>No projects found!</p>
+  {% endif %}
+
+</body>
+
+{% render 'partials/footer.liquid'%}

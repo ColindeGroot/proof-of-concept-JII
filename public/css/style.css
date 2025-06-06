@@ -1,0 +1,15 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+ul, ol, dl {
+    list-style: none;
+}
+
+.experiment-board{
+    margin: 5vh 5vw;
+    padding: 0;
+}
