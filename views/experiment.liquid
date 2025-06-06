@@ -1,27 +1,28 @@
 <body>
     <h1>{{ experiment.name }}</h1>
     <p>
-        <strong>description:</strong> {{ experiment.description }} <br/>
+        <strong>Description:</strong> {{ experiment.description }} <br/>
         <strong>Status:</strong> {{ experiment.status }}<br/>
-        <strong>Aangemaakt op:</strong> {{ experiment.createdAt | date: "%d-%m-%Y %H:%M" }}<br/>
-        <strong>Geüpdatet op:</strong> {{ experiment.updatedAt | date: "%d-%m-%Y %H:%M" }}<br/>
+        <strong>Created:</strong> {{ experiment.createdAt | date: "%d-%m-%Y %H:%M" }}<br/>
+        <strong>Updated:</strong> {{ experiment.updatedAt | date: "%d-%m-%Y %H:%M" }}<br/>
     </p>
 
 
     {% if experiment.data %}
     <h2>Data:</h2>
     <p>Rows:{{ experiment.data.totalRows }}</p>
-    {% if experiment.data.columns %} 
-        {% comment %}check if experiment contains data columns{% endcomment %}
-    <h3>Columns</h3>
-    <ul>
-        {% for col in experiment.data.columns %}
-            {% comment %}
-                returns objects check in server for different fetch 
-            {% endcomment %}
-        <li>{{ col }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+
+        {% if experiment.data.columns %} 
+            {% comment %}check if experiment contains data columns{% endcomment %}
+        <h3>Columns</h3>
+
+        <ul>
+            {% for col in experiment.data.columns %}
+                {% comment %}returns objects check in server for different fetch{% endcomment %}
+            <li>{{ col }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
     {% endif %}
 </body>

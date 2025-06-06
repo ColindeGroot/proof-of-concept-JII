@@ -4,34 +4,36 @@
 
   <h1>Experiments overview</h1>
 
-  <div>
+  <section>
     <h2>Filter option</h2>
     <details>
       <summary>Filter options</summary>
-      <ul>
-        <li>filter option</li>
-        <li>filter option</li>
-        <li>filter option</li>
+      <ul class="filters">
+        <li><button class="filter">filter option</button></li>
+        <li><button class="filter">filter option</button></li>
+        <li><button class="filter">filter option</button></li>
       </ul>
     </details>
-  </div>
 
-  {% if experiments and experiments.size > 0 %}
-  <ul class="experiment-board">
-    {% for experiment in experiments %}
 
-    <li class="experiment">
-      <h3>{{ experiment.name }}</h3>
-      <p>{{ experiment.description | truncate:'60' }}</p>
-    </li>
+    {% if experiments and experiments.size > 0 %}
+    <ul class="experiment-board">
+      {% for experiment in experiments %}
 
-    {% endfor %}
-  </ul>
+      <li class="experiment">
+        <h3>{{ experiment.name }}</h3>
+        <p>{{ experiment.description }}</p>
+        <p><strong>Updated: </strong><time>{{ experiment.updatedAt | date: "%d-%m-%Y %H:%M" }}</time></p>
+        <a href="/experiment/{{ experiment.id }}">See more</a>
+      </li>
 
-  {% else %}
+      {% endfor %}
+    </ul>
+    {% else %}
 
-  <p>No projects found!</p>
-  {% endif %}
+    <p>No projects found!</p>
+    {% endif %}
+  </section>
 
 </body>
 

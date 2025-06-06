@@ -30,11 +30,10 @@ app.get('/experiment/:id', async (req, res) => {
   try {
  
     const experimentId = req.params.id;
-
   
     const homeResponse = await fetch(`https://open-jii-api-mock.onrender.com/api/v1/experiments/${experimentId}`);
     if (!homeResponse.ok) {
-      return res.status(homeResponse.status).send("Experiment niet gevonden");
+      return res.status(homeResponse.status).send("Experiment not found");
     }
 
     const experimentData = await homeResponse.json();
@@ -42,7 +41,7 @@ app.get('/experiment/:id', async (req, res) => {
     res.render('experiment', { experiment: experimentData });
   } catch (error) {
     console.error(error);
-    res.status(500).send("Er ging iets mis bij het ophalen van het experiment.");
+    res.status(500).send("something went wrong");
   }
 });
 

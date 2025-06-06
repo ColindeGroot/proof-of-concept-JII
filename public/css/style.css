@@ -1,15 +1,88 @@
-body{
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 
+    --dark-green: #005e5e;
+    --light-green: #49e06d;
+    --blue: #afd7f4;
+    --blue-light: #afd7f480;
+    --yellow: #fff381;
+    --yellow-light: #fff28182;
+
+    --black: #000;
+    --white: #fff;
+
+    font-size: 1em;
+    font-family: "Overpass", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--yellow-light);
+
+
 }
 
-ul, ol, dl {
+h1,
+h2,
+h3 {
+    font-family: "Poppins", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+}
+
+ul,
+ol,
+dl {
     list-style: none;
 }
 
-.experiment-board{
+a {
+    font-weight: 700;
+    text-decoration: none;
+
+}
+
+nav {
+    background-color: var(--dark-green);
+    color: var(--white);
+
+    a {
+        color: var(--white);
+    }
+
+}
+
+.filters {
+    background-color: var(--dark-green);
+    width: fit-content;
+    padding: 2em;
+    margin: 1em;
+    border-radius: 5px;
+
+    .filter {
+        margin: 0.5em 0;
+        color: var(--yellow);
+        background: none;
+        border:1px solid var(--yellow);
+     
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+
+.experiment-board {
     margin: 5vh 5vw;
     padding: 0;
+}
+
+.experiment {
+    width: 30%;
+
+    border-radius: 5px;
+    padding: 1em;
+    margin: 1em;
+    background-color: var(--light-green);
+    color: var(--black);
 }
