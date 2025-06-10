@@ -7,12 +7,15 @@
   <section>
     <h2>Filter option</h2>
     <details>
-      <summary>Filter options</summary>
-      <ul class="filters">
-        <li><button class="filter">filter option</button></li>
-        <li><button class="filter">filter option</button></li>
-        <li><button class="filter">filter option</button></li>
-      </ul>
+      <summary>Filter:</summary>
+      <form class="filters" id="sort-form">
+        <label for="sort">Sort:</label>
+        <select id="sort" name="sort">
+          <option class="filter" value="recent">Most recent</option>
+          <option class="filter" value="oldest">Least recent</option>
+        </select>
+      </form>
+
     </details>
 
 
@@ -33,7 +36,22 @@
 
     <p>No projects found!</p>
     {% endif %}
+
   </section>
+  <form action="/create-experiment" method="post">
+    <fieldset>
+      <legend>Create Post</legend>
+      <label for="name">Experiment name</label>
+      <input type="text" name="name" placeholder="Name of experiment">
+
+      <label for="description">Description</label>
+      <input type="text" name="description" placeholder="Descripe experiment">
+
+      <button class="post-button" type="submit" value="Create">post</button>
+    </fieldset>
+  </form>
+
+  
 
 </body>
 

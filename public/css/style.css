@@ -15,10 +15,11 @@ body {
 
     --black: #000;
     --white: #fff;
+    --dark-white :#eee;
 
     font-size: 1em;
     font-family: "Overpass", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-    background-color: var(--yellow-light);
+    background-color: var(--dark-white);
 
 
 }
@@ -27,7 +28,10 @@ h1,
 h2,
 h3 {
     font-family: "Poppins", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: var(--dark-green);
 }
+
+
 
 ul,
 ol,
@@ -80,9 +84,10 @@ nav {
 .experiment {
     width: 30%;
 
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 1em;
     margin: 1em;
-    background-color: var(--light-green);
+    background-color: var(--white);
     color: var(--black);
+
 }
