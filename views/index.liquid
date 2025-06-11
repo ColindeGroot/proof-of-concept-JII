@@ -4,20 +4,19 @@
 
   <h1>Experiments overview</h1>
 
-  <section>
+  <section class="experminets-layout">
     <h2>Filter option</h2>
-    <details>
-      <summary>Filter:</summary>
-      <form class="filters" id="sort-form">
-        <label for="sort">Sort:</label>
-        <select id="sort" name="sort">
-          <option class="filter" value="recent">Most recent</option>
-          <option class="filter" value="oldest">Least recent</option>
-        </select>
-      </form>
-
-    </details>
-
+    
+    <form class="filters" id="sort-form">
+      <details>
+        <summary>Filter:</summary>
+          <label for="sort">Sort:</label>
+          <select id="sort" name="sort">
+            <option class="filter" value="recent">Most recent</option>
+            <option class="filter" value="oldest">Least recent</option>
+          </select>
+        </details>
+    </form>
 
     {% if experiments and experiments.size > 0 %}
     <ul class="experiment-board">
@@ -38,6 +37,7 @@
     {% endif %}
 
   </section>
+  
   <form action="/create-experiment" method="post">
     <fieldset>
       <legend>Create Post</legend>
@@ -47,7 +47,7 @@
       <label for="description">Description</label>
       <input type="text" name="description" placeholder="Descripe experiment">
 
-      <button class="post-button" type="submit" value="Create">post</button>
+      <button class="post-button" type="submit" value="Create">Create experiment</button>
     </fieldset>
   </form>
 

@@ -46,6 +46,11 @@ a {
 }
 
 nav {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    top: 0;
+
     background-color: var(--dark-green);
     color: var(--white);
 
@@ -54,6 +59,11 @@ nav {
     }
 
 }
+
+/* .experminets-layout ul{
+    height: 80vh;
+    overflow: auto;
+} */
 
 .filters {
     background-color: var(--dark-green);

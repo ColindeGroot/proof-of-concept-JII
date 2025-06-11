@@ -63,7 +63,8 @@ app.post('/create-experiment', async (req, res) => {
         description,
         status: "published", // Setting everything on public for now since this is still in testing fase and all post should be directly visible for testing pruposes
         visibility: "public", // same thing for the others
-        embargoIntervalDays: 0
+        embargoIntervalDays: 0,
+        createdAt: Date.now()
       })
     });
 
