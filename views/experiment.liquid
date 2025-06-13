@@ -1,10 +1,10 @@
 <body>
     <h1>{{ experiment.name }}</h1>
     <p>
-        <strong>Description:</strong> {{ experiment.description }} <br/>
-        <strong>Status:</strong> {{ experiment.status }}<br/>
-        <strong>Created:</strong> {{ experiment.createdAt | date: "%d-%m-%Y %H:%M" }}<br/>
-        <strong>Updated:</strong> {{ experiment.updatedAt | date: "%d-%m-%Y %H:%M" }}<br/>
+        <strong>Description:</strong> {{ experiment.description }} <br />
+        <strong>Status:</strong> {{ experiment.status }}<br />
+        <strong>Created:</strong> {{ experiment.createdAt | date: "%d-%m-%Y %H:%M" }}<br />
+        <strong>Updated:</strong> {{ experiment.updatedAt | date: "%d-%m-%Y %H:%M" }}<br />
     </p>
 
 
@@ -12,17 +12,25 @@
     <h2>Data:</h2>
     <p>Rows:{{ experiment.data.totalRows }}</p>
 
-        {% if experiment.data.columns %} 
-            {% comment %}check if experiment contains data columns{% endcomment %}
-        <h3>Columns</h3>
+    {% if experiment.data.columns %}
+    {% comment %}check if experiment contains data columns{% endcomment %}
+    <h3>Columns</h3>
 
-        <ul>
-            {% for col in experiment.data.columns %}
-                {% comment %}returns objects check in server for different fetch{% endcomment %}
-            <li>{{ col }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+    <ul>
+        {% for col in experiment.data.columns %}
+        {% comment %}returns objects check in server for different fetch{% endcomment %}
+        <li>{{ col }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 
     {% endif %}
+
+    <form action="/experiment/{{ experiment.id }}/delete" method="POST">
+  <button type="submit">Delete experiment</button>
+</form>
+
+
+
+
 </body>

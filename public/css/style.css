@@ -15,7 +15,7 @@ body {
 
     --black: #000;
     --white: #fff;
-    --dark-white :#eee;
+    --dark-white: #eee;
 
     font-size: 1em;
     font-family: "Overpass", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
@@ -60,11 +60,6 @@ nav {
 
 }
 
-/* .experminets-layout ul{
-    height: 80vh;
-    overflow: auto;
-} */
-
 .filters {
     background-color: var(--dark-green);
     width: fit-content;
@@ -76,8 +71,8 @@ nav {
         margin: 0.5em 0;
         color: var(--yellow);
         background: none;
-        border:1px solid var(--yellow);
-     
+        border: 1px solid var(--yellow);
+
 
         &:hover {
             cursor: pointer;
@@ -87,17 +82,34 @@ nav {
 
 
 .experiment-board {
-    margin: 5vh 5vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+    gap: 1.5rem;
+    margin: 0 5vw;
     padding: 0;
+
+
 }
 
 .experiment {
-    width: 30%;
-
+    height: 18em;
     border-radius: 10px;
     padding: 1em;
     margin: 1em;
     background-color: var(--white);
     color: var(--black);
 
+    p:first-child {
+
+        white-space: nowrap;
+        overflow: hidden !important;
+        text-overflow: ellipsis;
+    }
+
+}
+
+@media (min-width:1400px) {
+    .experiment {
+        height: auto;
+    }
 }

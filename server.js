@@ -1,4 +1,5 @@
 import express, { request } from 'express';
+import { v4 as uuidv4 } from 'uuid'; // creating a uuid for the post's id
 import { Liquid } from 'liquidjs';
 
 // Maak een nieuwe Express-applicatie aan
@@ -28,7 +29,7 @@ app.get('/', async (req, res) => {
     console.error(error)
     res.status(500).send(error)
   }
-}); 
+});
 
 
 app.get('/experiment/:id', async (req, res) => {
@@ -59,12 +60,13 @@ app.post('/create-experiment', async (req, res) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
+        id: uuidv4(), //render requires a uuid to be able to search on id. When posting the posted experiment doesnt get an 
         name,
         description,
         status: "published", // Setting everything on public for now since this is still in testing fase and all post should be directly visible for testing pruposes
         visibility: "public", // same thing for the others
         embargoIntervalDays: 0,
-        createdAt: Date.now()
+        createdAt: (new Date()).toISOString()  //doesn't get pushed otherwise
       })
     });
 
@@ -72,22 +74,35 @@ app.post('/create-experiment', async (req, res) => {
       throw new Error(`API returned status ${response.status}`);
     }
 
-    // Redirect back to home after posting
-    res.redirect('/');
   } catch (error) {
     console.error(error);
-    res.status(500).send('Er ging iets mis bij het maken van een experiment.');
+    res.status(500).send('Something went wrong deleting the experiment.', error);
+  }
+});
+
+app.post('/experiment/:id/delete', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const response = await fetch(
+      `https://open-jii-api-mock.onrender.com/api/v1/experiments/${id}`,
+      { method: 'DELETE' }
+    );
+    if (!response.ok) {
+      console.error(`Couldn't delete ${id}`);
+      return res.status(response.status).send(':(');
+    }
+    return res.redirect('/');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error deleting experiment!');
   }
 });
 
 
-
-
-
-// Stel de poort in
+// Set PORT
 const PORT = process.env.PORT || 8001;
 
-// Start de server
+// Start server
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
