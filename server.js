@@ -33,22 +33,21 @@ app.get('/', async (req, res) => {
 
 
 app.get('/experiment/:id', async (req, res) => {
-  try {
     // make a page for the selected project on the homepage
     const experimentId = req.params.id;
 
     const homeResponse = await fetch(`https://open-jii-api-mock.onrender.com/api/v1/experiments/${experimentId}`); //get the data of selected project with the filter
-    if (!homeResponse.ok) {
-      return res.status(homeResponse.status).send("Experiment not found");
-    }
 
     const experimentData = await homeResponse.json();
 
-    res.render('experiment', { experiment: experimentData });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send("something went wrong");
-  }
+    let experimentColumns
+
+    if (experimentData.data){ 
+       experimentColumns = experimentData.data.columns
+    }
+    // console.log(experimentColumns) 
+
+    res.render('experiment', { experiment: experimentData, column: experimentColumns});
 });
 
 app.post('/create-experiment', async (req, res) => {
@@ -70,10 +69,6 @@ app.post('/create-experiment', async (req, res) => {
       })
     });
 
-    if (!response.ok) {
-      throw new Error(`API returned status ${response.status}`);
-    }
-
   } catch (error) {
     console.error(error);
     res.status(500).send('Something went wrong deleting the experiment.', error);
@@ -87,11 +82,9 @@ app.post('/experiment/:id/delete', async (req, res) => {
       `https://open-jii-api-mock.onrender.com/api/v1/experiments/${id}`,
       { method: 'DELETE' }
     );
-    if (!response.ok) {
-      console.error(`Couldn't delete ${id}`);
-      return res.status(response.status).send(':(');
-    }
+
     return res.redirect('/');
+
   } catch (error) {
     console.error(error);
     res.status(500).send('Error deleting experiment!');
