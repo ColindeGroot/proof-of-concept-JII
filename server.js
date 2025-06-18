@@ -19,11 +19,9 @@ app.get('/', async (req, res) => {
     const experimentsResponseJSON = await experimentsResponse.json();
     // console.log(experimentsResponseJSON)
 
-    const experiments = [];
-    experiments.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)); //sort experiments from new to old 
+    const experiments = experimentsResponseJSON.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); //sort experiments from new to old 
 
-
-    res.render('index.liquid', { experiments: experimentsResponseJSON })
+    res.render('index.liquid', { experiments: experiments })
   }
   catch (error) {
     console.error(error)
@@ -53,7 +51,7 @@ app.get('/experiment/:id', async (req, res) => {
 
 app.post('/create-experiment', async (req, res) => {
   //Get data from the input fields and pass them to the POST 
-  const { name, description } = req.body;
+  const { name, description, data } = req.body;
 
   const response = await fetch('https://open-jii-api-mock.onrender.com/api/v1/experiments', {
     method: 'POST',
@@ -62,6 +60,7 @@ app.post('/create-experiment', async (req, res) => {
       id: uuidv4(), //render requires a uuid to be able to search on id. When posting the posted experiment doesnt get an 
       name,
       description,
+      data,
       status: "published", // Setting everything on public for now since this is still in testing fase and all post should be directly visible for testing pruposes
       visibility: "public", // same thing for the others
       embargoIntervalDays: 0,

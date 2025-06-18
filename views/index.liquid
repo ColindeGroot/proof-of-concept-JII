@@ -24,15 +24,17 @@
       {% for experiment in experiments %}
 
       <article class="experiment">
-        <div>
-
-        </div>
         <h3>{{ experiment.name }}</h3>
         <p>{{ experiment.description }}</p>
-        <p><strong>Created: </strong>{{ experiment.createdAt | date:"%d-%m-%Y %H:%M" }}</p>
-        <p><strong>Updated: </strong><time>{{ experiment.updatedAt | date: "%d-%m-%Y %H:%M" }}</time></p>
+
+        <div class="experiment-times">
+          <p><strong>Created: </strong>{{ experiment.createdAt | date:"%d-%m-%Y %H:%M" }}</p>
+          <p><strong>Updated: </strong><time>{{ experiment.updatedAt | date: "%d-%m-%Y %H:%M" }}</time></p>
+        </div>
+
         <div class="experiment-buttons">
-          <a href="/experiment/{{ experiment.id }}">See more</a>
+          <a class="experiment-link" href="/experiment/{{ experiment.id }}">See more</a>
+
           <form action="/experiment/{{ experiment.id }}/delete" method="POST" class="delete-home">
             <button type="submit" class="delete-button">Delete
               <svg class="bin" fill="#ffffff" height="20px" width="20px" version="1.1" id="Layer_1"
@@ -62,6 +64,7 @@
           </form>
 
         </div>
+
       </article>
 
       {% endfor %}
@@ -122,6 +125,26 @@
       }, 2500);
     })
   };
+
+
+  window.lastUpdated = (function () {
+    const first = document.querySelector('.experiment-board article time');
+    return first ? new Date(first.textContent) : new Date();
+  })();
+
+ 
+  setInterval(async () => {
+
+      const resp = await fetch('/api/v1/experiments?status=published');
+      const list = await resp.json();
+     
+      const newest = list
+        .map(e => new Date(e.updatedAt))
+        .sort((a, b) => b - a)[0];
+      if (newest > window.lastUpdated) {
+        window.location.reload();
+      }
+  }, 5000);
 
 </script>
 
