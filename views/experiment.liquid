@@ -1,36 +1,64 @@
-<body>
-    <h1>{{ experiment.name }}</h1>
-    <p>
-        <strong>Description:</strong> {{ experiment.description }} <br />
-        <strong>Status:</strong> {{ experiment.status }}<br />
-        <strong>Created:</strong> {{ experiment.createdAt | date: "%d-%m-%Y %H:%M" }}<br />
-        <strong>Updated:</strong> {{ experiment.updatedAt | date: "%d-%m-%Y %H:%M" }}<br />
-    </p>
+{% render 'partials/header.liquid' %}
+
+<main id="main-content">
+<article class="experiment-article">
+    <header class="article-header">
+        <h1>{{ experiment.name }}</h1>
+        <dl>
+            <dt>Status:</dt>
+            <dd><span class="label">{{ experiment.status }}</span></dd>
+            <dt>Created:</dt>
+            <dd>{{ experiment.createdAt | date: "%d-%m-%Y %H:%M" }}</dd>
+            <dt>Updated:</dt>
+            <dd>{{ experiment.updatedAt | date: "%d-%m-%Y %H:%M" }}</dd>
+        </dl>
+
+    </header>
+
+    <div class="article-body">
+        <p>
+            {{ experiment.description }}
+        </p>
 
 
-    {% if experiment.data %}
-    <h2>Data:</h2>
-    <p>Rows:{{ experiment.data.totalRows }}</p>
+        {% if experiment.data %}
+        <h2>Data:</h2>
+        <p>Rows:{{ experiment.data.totalRows }}</p>
 
-    {% if experiment.data.columns %}
-    {% comment %}check if experiment contains data columns{% endcomment %}
-    <h3>Columns</h3>
+        {% if experiment.data.columns %}
+        
+        <h3>Columns</h3>
 
-    <ul>
-        {% for col in experiment.data.columns %}
-        {% comment %}returns objects check in server for different fetch{% endcomment %}
-        <li>{{ col }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+        <table>
+            <thead>
+                <tr>
+                    {% for col in experiment.data.columns %}
+                    <th title="{{ col.type_text }}">{{ col.name }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in experiment.data.rows %}
+                <tr>
+                    {% for value in row %}
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    {% endif %}
+        {% endif %}
+        {% endif %}
 
-    <form action="/experiment/{{ experiment.id }}/delete" method="POST">
-  <button type="submit">Delete experiment</button>
-</form>
+        <form action="/experiment/{{ experiment.id }}/delete" method="POST">
+            {% comment %} <label for="delete">Remove</label> {% endcomment %}
+            <button name="delete" type="submit">Delete experiment</button>
+        </form>
 
+        <a href="/">Return</a>
+    </div>
+</article>
+</main>
 
-
-
-</body>
+{% render 'partials/footer.liquid' %}

@@ -1,82 +1,134 @@
 {% render 'partials/header.liquid' %}
+<main id="main-content">
+  <h1 class="intro-title">Experiments overview</h1>
 
-<h1 class="intro-title">Experiments overview</h1>
+  <section class="experminets-layout">
 
-<section class="experminets-layout">
-  <h2>Filter option</h2>
+    <form action="/create-experiment" method="post" data-enhanced="true" data-enhanced="create-experiment-form">
+      <fieldset>
+        <legend>Create Post</legend>
+        <label for="name">Experiment name</label>
+        <input type="text" name="name" placeholder="Name of experiment">
 
-  <form class="filters" id="sort-form">
-    <label for="sort">Filter:</label>
-    <select id="sort" name="sort">
-      <option class="filter" value="recent">Most recent</option>
-      <option class="filter" value="oldest">Least recent</option>
-    </select>
-    </details>
-  </form>
+        <label for="description">Description</label>
+        <input type="text" name="description" placeholder="Descripe experiment">
 
-  {% if experiments and experiments.size > 0 %}
-  <div class="experiment-board">
-    {% for experiment in experiments %}
+        <button class="post-button button-post" type="submit" value="Create">Create experiment</button>
+      </fieldset>
+    </form>
 
-    <article class="experiment">
-      <div>
-        <form action="/experiment/{{ experiment.id }}/delete" method="POST" class="delete-home">
-          <button type="submit" class="delete-button">  
-            <svg class="bin" fill="#000000" height="30px" width="30px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 458.5 458.5" xml:space="preserve">
-              <g>
+    <form class="filters" id="sort-form">
+      <label for="sort">Filter:</label>
+      <select id="sort" name="sort">
+        <option class="filter" value="recent">Most recent</option>
+        <option class="filter" value="oldest">Least recent</option>
+      </select>
+    </form>
+
+    {% if experiments and experiments.size > 0 %}
+    <div class="experiment-board">
+      {% for experiment in experiments %}
+
+      <article class="experiment">
+        <div>
+          
+        </div>
+        <h3>{{ experiment.name }}</h3>
+        <p>{{ experiment.description }}</p>
+        <p><strong>Created: </strong>{{ experiment.createdAt | date:"%d-%m-%Y %H:%M" }}</p>
+        <p><strong>Updated: </strong><time>{{ experiment.updatedAt | date: "%d-%m-%Y %H:%M" }}</time></p>
+        <div class="experiment-buttons">
+          <a href="/experiment/{{ experiment.id }}">See more</a>
+          <form action="/experiment/{{ experiment.id }}/delete" method="POST" class="delete-home" >
+            <button type="submit" class="delete-button">Delete
+              <svg class="bin" fill="#ffffff" height="20px" width="20px" version="1.1" id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 458.5 458.5"
+                xml:space="preserve">
                 <g>
                   <g>
-                    <path d="M382.078,57.069h-89.78C289.128,25.075,262.064,0,229.249,0S169.37,25.075,166.2,57.069H76.421
-				c-26.938,0-48.854,21.916-48.854,48.854c0,26.125,20.613,47.524,46.429,48.793V399.5c0,32.533,26.467,59,59,59h192.508
-				c32.533,0,59-26.467,59-59V154.717c25.816-1.269,46.429-22.668,46.429-48.793C430.933,78.985,409.017,57.069,382.078,57.069z
-				 M229.249,30c16.244,0,29.807,11.673,32.76,27.069h-65.52C199.442,41.673,213.005,30,229.249,30z M354.503,399.501
-				c0,15.991-13.009,29-29,29H132.995c-15.991,0-29-13.009-29-29V154.778c12.244,0,240.932,0,250.508,0V399.501z M382.078,124.778
-				c-3.127,0-302.998,0-305.657,0c-10.396,0-18.854-8.458-18.854-18.854S66.025,87.07,76.421,87.07h305.657
-				c10.396,0,18.854,8.458,18.854,18.854S392.475,124.778,382.078,124.778z" />
-                    <path d="M229.249,392.323c8.284,0,15-6.716,15-15V203.618c0-8.284-6.715-15-15-15c-8.284,0-15,6.716-15,15v173.705
-				C214.249,385.607,220.965,392.323,229.249,392.323z" />
-                    <path d="M306.671,392.323c8.284,0,15-6.716,15-15V203.618c0-8.284-6.716-15-15-15s-15,6.716-15,15v173.705
-				C291.671,385.607,298.387,392.323,306.671,392.323z" />
-                    <path d="M151.828,392.323c8.284,0,15-6.716,15-15V203.618c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v173.705
-				C136.828,385.607,143.544,392.323,151.828,392.323z" />
+                    <g>
+                      <path d="M382.078,57.069h-89.78C289.128,25.075,262.064,0,229.249,0S169.37,25.075,166.2,57.069H76.421
+			                  c-26.938,0-48.854,21.916-48.854,48.854c0,26.125,20.613,47.524,46.429,48.793V399.5c0,32.533,26.467,59,59,59h192.508
+				                c32.533,0,59-26.467,59-59V154.717c25.816-1.269,46.429-22.668,46.429-48.793C430.933,78.985,409.017,57.069,382.078,57.069z
+				                M229.249,30c16.244,0,29.807,11.673,32.76,27.069h-65.52C199.442,41.673,213.005,30,229.249,30z M354.503,399.501
+				                c0,15.991-13.009,29-29,29H132.995c-15.991,0-29-13.009-29-29V154.778c12.244,0,240.932,0,250.508,0V399.501z M382.078,124.778
+				                c-3.127,0-302.998,0-305.657,0c-10.396,0-18.854-8.458-18.854-18.854S66.025,87.07,76.421,87.07h305.657
+				                c10.396,0,18.854,8.458,18.854,18.854S392.475,124.778,382.078,124.778z" />
+                      <path d="M229.249,392.323c8.284,0,15-6.716,15-15V203.618c0-8.284-6.715-15-15-15c-8.284,0-15,6.716-15,15v173.705
+			                    	C214.249,385.607,220.965,392.323,229.249,392.323z" />
+                      <path d="M306.671,392.323c8.284,0,15-6.716,15-15V203.618c0-8.284-6.716-15-15-15s-15,6.716-15,15v173.705
+				                    C291.671,385.607,298.387,392.323,306.671,392.323z" />
+                      <path d="M151.828,392.323c8.284,0,15-6.716,15-15V203.618c0-8.284-6.716-15-15-15c-8.284,0-15,6.716-15,15v173.705
+				                    C136.828,385.607,143.544,392.323,151.828,392.323z" />
+                    </g>
                   </g>
                 </g>
-              </g>
-            </svg>
-          </button>
-        </form>
-      </div>
-      <h3>{{ experiment.name }}</h3>
-      <p>{{ experiment.description }}</p>
-      <p><strong>Created: </strong>{{ experiment.createdAt | date:"%d-%m-%Y %H:%M" }}</p>
-      <p><strong>Updated: </strong><time>{{ experiment.updatedAt | date: "%d-%m-%Y %H:%M" }}</time></p>
-      <a href="/experiment/{{ experiment.id }}">See more</a>
-    </article>
+              </svg>
+            </button>
+          </form>
+          
+        </div>
+      </article>
 
-    {% endfor %}
-  </div>
-  {% else %}
+      {% endfor %}
+    </div>
+    {% else %}
 
-  <p>No projects found!</p>
-  {% endif %}
+    <p>No projects found!</p>
+    {% endif %}
 
-</section>
+  </section>
 
-<form action="/create-experiment" method="post" data-enhanced="true">
-  <fieldset>
-    <legend>Create Post</legend>
-    <label for="name">Experiment name</label>
-    <input type="text" name="name" placeholder="Name of experiment">
+</main>
 
-    <label for="description">Description</label>
-    <input type="text" name="description" placeholder="Descripe experiment">
+<script type="module">
+    if ('fetch' in window && 'DOMParser' in window) {
 
-    <button class="post-button" type="submit" value="Create">Create experiment</button>
-  </fieldset>
-</form>
+        // Als er ergens op de pagina een formulier wordt gesubmit..
+        // (We maken hier gebruik van Event Delegation)
+        document.addEventListener('submit', async function (event) {
 
+            // Hou in een variabele bij welk formulier dat was
+            const form = event.target;
 
+            if (!form.hasAttribute('data-enhanced')) return;
 
+            event.preventDefault();
+    
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+
+            // Zet de button tijdelijk uit als hij aan het laden is en de post actief is
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Creating...';
+
+            // Verzamel form data samen met de geactiveerde button naam en waardes
+            const formData = new FormData(form);
+            if (event.submitter) {
+                formData.append(event.submitter.name, event.submitter.value);
+            }
+
+            // Verander form data naar een object
+            const formObject = Object.fromEntries(formData.entries());
+
+            // Stuur form data als JSON naar de server 
+            const response = await fetch(form.action, {
+                method: form.method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formObject)
+            });
+
+            // Toon succes state en herlaad pagina
+            submitButton.innerHTML = 'Experiment added!';
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 2500);
+        })                                                                                    
+    };
+
+</script>
 
 {% render 'partials/footer.liquid'%}
