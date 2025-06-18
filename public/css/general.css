@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    --dark-green: #005e5e;
+    --light-green: #49e06d;
+    --mint-green: rgb(231, 251, 237);
+    --blue: #afd7f4;
+    --blue-light: #afd7f480;
+    --yellow: #fff381;
+    --yellow-light: #fff28182;
+
+    --black: #000;
+    --white: #fff;
+    --dark-white: #eee;
+
+    font-size: 1em;
+    font-family: "Overpass", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--blue-light);
+
+
+}
+
+h1,
+h2,
+h3 {
+    font-family: "Poppins", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: var(--dark-green);
+    margin: 0;
+}
+
+h1 {
+    font-size: 1.5em;
+
+    @media (min-width:1100px) {
+        font-size: 2.5em;
+    }
+
+    @media (min-width:700px) {
+        font-size: 2.0em;
+    }
+}
+
+
+ul,
+ol {
+    list-style: none;
+}
+
+dl {
+    display: grid;
+    grid-template-columns: auto-fit 1fr;
+    gap: 0.5rem 0;
+
+    @media (min-width:800px) {
+        grid-template-columns: max-content 1fr;
+    }
+}
+
+dd {
+    margin: 0px 0.5em;
+}
+
+dt {
+    font-weight: bold;
+}
+
+
+a {
+    font-weight: 700;
+    text-decoration: none;
+
+}
+
+:focus {
+    outline: var(--light-green) 3px dotted;
+    outline-offset: 0.3em;
+    border-radius: 10px;
+}
+
+nav {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 99;
+    background-color: var(--dark-green);
+    color: var(--white);
+
+    ul {
+        
+        height: 100%;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 2em;
+
+    }
+
+}
+
+a {
+    color: var(--white);
+
+    &::after {
+        content: '';
+        width: 0;
+        display: block;
+        height: 2px;
+        background: var(--light-green);
+        transition: width 0.3s ease-in-out;
+    }
+
+    &:hover {
+        color: var(--light-green);
+    }
+
+    &:hover::after {
+        width: 100%;
+
+    }
+}
+
+.skip {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    z-index: 100;
+}
+
+/* not nesting this as it's not supported everywhere while it is a crucial function for accesability */
+.skip:focus {
+    position: static;
+    width: auto;
+    height: auto;
+}
+
+button, .button {
+    display: block;
+    width: max-content;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: inherit;
+
+    padding: 0.75em 2em;
+    color: var(--white);
+    border-radius: 5px;
+    border: 2px solid var(--dark-green);
+    background-color: var(--dark-green);
+
+    &:hover,
+    &:focus {
+        color: var(--dark-green);
+        background-color: var(--white);
+
+    }
+}
+
+input[type=text] {
+    padding: 0.5em 1em;
+    border: 2px solid var(--light-green);
+    border-radius: 5px;
+}
+
+select{
+    padding: 0.5em 1em;
+    border: 2px solid var(--light-green);
+    border-radius: 10px;
+}
+
+/* buttons for microinteractions */
+.button-light {
+    font-family: inherit;
+    font-weight: bold;
+    font-size: inherit;
+
+    padding: 0.75em 2em;
+    color: var(--white);
+    border-radius: 5px;
+    border: 2px solid var(--dark-green);
+    background-color: var(--white);
+    background: linear-gradient(to left, var(--dark-green) 50%, var(--white) 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    transition: all 0.4s ease;
+
+    &:hover,
+    &:focus {
+        background-position: left bottom;
+        color: var(--dark-green);
+
+    }
+}
+
+/* for dark bg */
+.button-dark {
+    font-family: inherit;
+    font-weight: bold;
+    font-size: inherit;
+
+    padding: 0.75em 2em;
+    color: var(--dark-green);
+    border-radius: 5px;
+    border: 2px solid var(--white);
+    background: linear-gradient(to left, var(--white) 50%, var(--dark-green) 50%);
+    background-size: 210% 100%; 
+    background-position: right bottom;
+    transition: all 0.4s ease;
+
+    &:hover,
+    &:focus {
+        background-position: left bottom;
+        color: var(--white);
+
+    }
+}
+
+main {
+    margin: 5vh 5vw;
+}
+
+.delete-button {
+    padding: 0.5em 1em;
+
+    &:hover .bin,
+    &:focus .bin {
+        cursor: pointer;
+        fill: red;
+        scale: 1.05;
+    }
+}

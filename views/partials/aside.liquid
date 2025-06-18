@@ -1,38 +1,51 @@
 <aside id="post-form">
-    <a href="#" class="close-button"><svg viewBox="0 0 32 32" width="32" height="32">
-            <title>Sluiten</title>
-            <path
-                d="M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z">
-            </path>
-        </svg></a>
+
+
     <form action="/create-experiment" method="post" class="post-form" data-enhanced="create-experiment-form">
+
+        <a href="#" class="close-button">
+            <svg viewBox="0 0 32 32" width="32" height="32">
+                <title>Close form</title>
+                <path
+                    d="M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z">
+                </path>
+            </svg>
+        </a>
+
         <fieldset>
+
             <legend>
                 <h2>Create Post</h2>
             </legend>
-            <div>
+
+            <div class="post-group">
                 <label for="name">Experiment name</label>
                 <input type="text" name="name" placeholder="Name of experiment">
             </div>
 
-            <div>
+            <div class="post-group">
                 <label for="description">Description</label>
                 <input type="text" name="description" placeholder="Descripe experiment">
             </div>
 
-            <button class="post-button button-post" type="submit" value="Create">Create experiment</button>
+            <div class="post-group">
+                <label for="columns">Data</label>
+                <input type="text" name="columns" placeholder='[{"name":"col1","type_name":"string","type_text":"..."}]'>
+            </div>
+
+            <button class="post-button button-dark" type="submit" value="Create">Create experiment</button>
         </fieldset>
     </form>
+
 </aside>
 
 <style>
     #post-form:target {
         left: 0;
-        
+
 
         ~main {
-            margin-left: 20vw;
-            filter: blur(1px);
+            margin-left: 40vw;
             transition: margin-left 0.2s ease-in-out, filter 0.3s ease;
         }
 
@@ -43,17 +56,36 @@
         position: fixed;
         top: 0;
         left: -100%;
-        width: 80vw;
+        width: 100%;
+        min-width: 0;
         height: 100%;
         background: var(--dark-green);
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        padding: 20px;
+        box-shadow: 2px 0 10px var(--black);
 
-        transition: 0.2s all ease-out;
+        transition: 0.4s all ease-in-out;
 
-
-        @media (min-width:800px) {
+        @media (min-width:750px) {
             width: 30vw;
+        }
+    }
+
+    .close-button {
+        position: absolute;
+        top: 5%;
+        right: 10%;
+
+        display: block;
+        width: max-content;
+
+        svg {
+            fill: var(--white);
+            rotate: 0deg;
+            transition: 0.3s all ease-in-out;
+
+            &:hover {
+                rotate: 360deg;
+            }
+
         }
     }
 </style>
