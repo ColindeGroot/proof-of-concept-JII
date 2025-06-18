@@ -1,0 +1,59 @@
+<aside id="post-form">
+    <a href="#" class="close-button"><svg viewBox="0 0 32 32" width="32" height="32">
+            <title>Sluiten</title>
+            <path
+                d="M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z">
+            </path>
+        </svg></a>
+    <form action="/create-experiment" method="post" class="post-form" data-enhanced="create-experiment-form">
+        <fieldset>
+            <legend>
+                <h2>Create Post</h2>
+            </legend>
+            <div>
+                <label for="name">Experiment name</label>
+                <input type="text" name="name" placeholder="Name of experiment">
+            </div>
+
+            <div>
+                <label for="description">Description</label>
+                <input type="text" name="description" placeholder="Descripe experiment">
+            </div>
+
+            <button class="post-button button-post" type="submit" value="Create">Create experiment</button>
+        </fieldset>
+    </form>
+</aside>
+
+<style>
+    #post-form:target {
+        left: 0;
+        
+
+        ~main {
+            margin-left: 20vw;
+            filter: blur(1px);
+            transition: margin-left 0.2s ease-in-out, filter 0.3s ease;
+        }
+
+    }
+
+    aside {
+        z-index: 999;
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80vw;
+        height: 100%;
+        background: var(--dark-green);
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+
+        transition: 0.2s all ease-out;
+
+
+        @media (min-width:800px) {
+            width: 30vw;
+        }
+    }
+</style>
