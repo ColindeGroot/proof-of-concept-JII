@@ -18,11 +18,14 @@ body {
     --white: #fff;
     --dark-white: #eee;
 
-    font-size: 1em;
     font-family: "Overpass", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     background-color: var(--blue-light);
 
+    font-size: 0.8em;
 
+    @media (min-width:500px){
+        font-size: 1em;
+    }
 }
 
 h1,
@@ -36,12 +39,36 @@ h3 {
 h1 {
     font-size: 1.5em;
 
+    @media (min-width:700px) {
+        font-size: 2.0em;
+    }
+
     @media (min-width:1100px) {
         font-size: 2.5em;
     }
+}
+
+h2 {
+     font-size: 1.3em;
 
     @media (min-width:700px) {
-        font-size: 2.0em;
+        font-size: 1.8em;
+    }
+
+      @media (min-width:1100px) {
+        font-size: 2.3em;
+    }
+}
+
+h3 {
+     font-size: 1.1em;
+
+    @media (min-width:700px) {
+        font-size: 1.6em;
+    }
+
+    @media (min-width:1100px) {
+        font-size: 2.1em;
     }
 }
 
@@ -89,13 +116,25 @@ nav {
     z-index: 99;
     background-color: var(--dark-green);
     color: var(--white);
+    padding: 1em 5vw;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2em;
+
+    img{
+        width: 5em;
+        height: auto;
+    }
+    
+    
 
     ul {
-        
-        height: 100%;
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        height: 100%;
         gap: 2em;
 
     }
@@ -105,6 +144,14 @@ nav {
 a {
     color: var(--white);
 
+    &:hover {
+        color: var(--light-green);
+    }
+
+    
+}
+
+.link-animation{
     &::after {
         content: '';
         width: 0;
@@ -112,10 +159,6 @@ a {
         height: 2px;
         background: var(--light-green);
         transition: width 0.3s ease-in-out;
-    }
-
-    &:hover {
-        color: var(--light-green);
     }
 
     &:hover::after {
@@ -141,7 +184,8 @@ a {
     height: auto;
 }
 
-button, .button {
+button,
+.button {
     display: block;
     width: max-content;
     font-family: inherit;
@@ -162,31 +206,38 @@ button, .button {
     }
 }
 
+label{
+    font-weight: bold;
+}
+
 input[type=text] {
     padding: 0.5em 1em;
     border: 2px solid var(--light-green);
     border-radius: 5px;
 }
 
-select{
-    padding: 0.5em 1em;
+select {
+    padding: 0.8em 1.5em;
     border: 2px solid var(--light-green);
     border-radius: 10px;
 }
 
+
+
+main {
+    margin: 5vh 5vw;
+}
+
+
+
+/* buttons */
 /* buttons for microinteractions */
 .button-light {
-    font-family: inherit;
-    font-weight: bold;
-    font-size: inherit;
-
-    padding: 0.75em 2em;
     color: var(--white);
-    border-radius: 5px;
     border: 2px solid var(--dark-green);
     background-color: var(--white);
     background: linear-gradient(to left, var(--dark-green) 50%, var(--white) 50%);
-    background-size: 200% 100%;
+    background-size: 210% 100%;
     background-position: right bottom;
     transition: all 0.4s ease;
 
@@ -200,16 +251,10 @@ select{
 
 /* for dark bg */
 .button-dark {
-    font-family: inherit;
-    font-weight: bold;
-    font-size: inherit;
-
-    padding: 0.75em 2em;
     color: var(--dark-green);
-    border-radius: 5px;
     border: 2px solid var(--white);
     background: linear-gradient(to left, var(--white) 50%, var(--dark-green) 50%);
-    background-size: 210% 100%; 
+    background-size: 210% 100%;
     background-position: right bottom;
     transition: all 0.4s ease;
 
@@ -219,10 +264,6 @@ select{
         color: var(--white);
 
     }
-}
-
-main {
-    margin: 5vh 5vw;
 }
 
 .delete-button {

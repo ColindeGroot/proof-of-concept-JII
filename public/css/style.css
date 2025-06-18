@@ -40,7 +40,7 @@ form in the aside
             align-items: center;
             gap: 0.3em;
 
-            label{
+            label {
                 color: var(--light-green);
                 font-weight: bold;
             }
@@ -71,12 +71,13 @@ form in the aside
     }
 }
 
-.experiment-options{
+.experiment-options {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1.5em;
     margin-bottom: 5vh;
+
 }
 
 .experiment-board {
@@ -99,13 +100,6 @@ form in the aside
     color: var(--black);
     box-shadow: #1d1d1b82 15px 14px 17px -9px;
 
-    p:first-child {
-
-        white-space: nowrap;
-        overflow: hidden !important;
-        text-overflow: ellipsis;
-    }
-
     .experiment-buttons {
         display: flex;
         justify-content: flex-start;
@@ -118,10 +112,11 @@ form in the aside
         color: var(--dark-green);
         background-color: var(--yellow);
         padding: 0 1em;
-        
+
         width: max-content;
         height: 3em;
-        line-height: 3em; /* vertical centering without flex*/
+        line-height: 3em;
+        /* vertical centering without flex*/
         border-radius: 5px;
 
     }
@@ -178,7 +173,7 @@ form in the aside
                 }
             }
 
-            td{
+            td {
                 line-height: 1.5;
             }
         }

@@ -14,20 +14,23 @@ app.set('view engine', 'liquid');
 app.set('views', './views');
 
 app.get('/', async (req, res) => {
-  try {
-    const experimentsResponse = await fetch('https://open-jii-api-mock.onrender.com/api/v1/experiments?status=published')
-    const experimentsResponseJSON = await experimentsResponse.json();
-    // console.log(experimentsResponseJSON)
+    const experimentsResponse = await fetch('https://open-jii-api-mock.onrender.com/api/v1/experiments?status=published');
+    const experimentsJSON = await experimentsResponse.json();
 
-    const experiments = experimentsResponseJSON.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); //sort experiments from new to old 
+    //
+    const sort = req.query.sort === 'oldest' ? 'oldest' : 'recent';
 
-    res.render('index.liquid', { experiments: experiments })
-  }
-  catch (error) {
-    console.error(error)
-    res.status(500).send(error)
-  }
+    const experiments = experimentsJSON.sort((a, b) => {
+      const dateA = new Date(a.createdAt);
+      const dateB = new Date(b.createdAt);
+      // recent = dateB - dateA
+      return sort === 'recent' ? dateB - dateA : dateA - dateB;
+    });
+
+    res.render('index.liquid', { experiments, sort });
+
 });
+
 
 
 app.get('/experiment/:id', async (req, res) => {
