@@ -111,6 +111,7 @@ form in the aside
         display: block;
         color: var(--dark-green);
         background-color: var(--yellow);
+        border: var(--yellow) 2px solid;
         padding: 0 1em;
 
         width: max-content;
@@ -118,6 +119,12 @@ form in the aside
         line-height: 3em;
         /* vertical centering without flex*/
         border-radius: 5px;
+
+        transition: background-color 0.3s ease-in-out;
+
+        &:hover {
+            background-color: var(--white);
+        }
 
     }
 
@@ -132,17 +139,44 @@ form in the aside
 
 
 /* experiment page */
+
+.return-link {
+    margin: 3vh 0;
+}
+
 .experiment-article {
     background-color: var(--white);
     border-radius: 10px;
     padding: 2em;
     margin: auto;
 
+    .label {
+        width: max-content;
+        background-color: var(--blue);
+        padding: 0.3em 0.7em;
+        border-radius: 20px;
+    }
+
 }
 
 .article-body {
-    width: 80%;
     background-color: #ffffff75;
+
+    .table-container {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; 
+    }
+
+    .table-container table {
+        width: 100%;
+        min-width: 600px; 
+
+        @media(min-width:1100px){
+            width: 80%;
+        }
+    }
+
 
     table {
         border: var(--dark-green) 1px solid;
@@ -180,11 +214,4 @@ form in the aside
 
     }
 
-}
-
-.label {
-    width: max-content;
-    background-color: var(--blue);
-    padding: 0.2em 0.5em;
-    border-radius: 20px;
 }

@@ -1,6 +1,9 @@
 {% render 'partials/header.liquid' %}
 
 <main id="main-content">
+
+<a class="return-link button" href="/">Return</a>
+
 <article class="experiment-article">
     <header class="article-header">
         <h1>{{ experiment.name }}</h1>
@@ -20,7 +23,6 @@
             {{ experiment.description }}
         </p>
 
-
         {% if experiment.data %}
         <h2>Data:</h2>
         <p>Rows:{{ experiment.data.totalRows }}</p>
@@ -29,7 +31,8 @@
         
         <h3>Columns</h3>
 
-        <table>
+        <div class="table-container">
+            <table>
             <thead>
                 <tr>
                     {% for col in experiment.data.columns %}
@@ -47,6 +50,8 @@
                 {% endfor %}
             </tbody>
         </table>
+        </div>
+        
 
         {% endif %}
         {% endif %}
@@ -55,8 +60,6 @@
             {% comment %} <label for="delete">Remove</label> {% endcomment %}
             <button name="delete" type="submit">Delete experiment</button>
         </form>
-
-        <a href="/">Return</a>
     </div>
 </article>
 </main>
