@@ -1,35 +1,20 @@
-Ontwerp en maak een data driven online concept voor een opdrachtgever
+# Open JII - Dashbaord
 
-De instructies voor deze opdracht staan in: [docs/INSTRUCTIONS.md](https://github.com/fdnd-task/proof-of-concept/blob/main/docs/INSTRUCTIONS.md)
+JII researchers aim to integrate knowledge and technology into an accessible, open platform that will move the science beyond the confines of the traditional laboratory and use the real world as the laboratory. Using advanced photosynthesis sensors and data science tools, they continuously record in detail how photosynthesis responds to changes in, for example, light.
 
-# Titel
-<!-- Geef je project een titel en schrijf in één zin wat het is -->
+This dashboard is meant to help store and view the results of those experiments.
 
-## Inhoudsopgave
 
-  * [Beschrijving](#beschrijving)
-  * [Gebruik](#gebruik)
-  * [Kenmerken](#kenmerken)
-  * [Installatie](#installatie)
-  * [Bronnen](#bronnen)
-  * [Licentie](#licentie)
+## About the dashboard
 
-## Beschrijving
-<!-- Bij Beschrijving staat kort beschreven wat voor project het is en wat je hebt gemaakt -->
-<!-- Voeg een mooie poster visual toe 📸 -->
-<!-- Voeg een link toe naar Github Pages 🌐-->
+Users have the option to create, view and delete experiments. This dashbaord does not include a login system since this is a mockup. 
 
-## Gebruik
-<!-- Bij Gebruik staat de user story, hoe het werkt en wat je er mee kan. -->
+The dashbaord is made using express for serverside rendering, liquid for templating and dynamic rendering and also contains CSS and client side JS for enhanchments.
+The website is fully functional with js disabled and is accesible for all kind of users.
 
-## Kenmerken
-<!-- Bij Kenmerken staat welke technieken zijn gebruikt en hoe. Wat is de HTML structuur? Wat zijn de belangrijkste dingen in CSS? Wat is er met JS gedaan en hoe? Misschien heb je iets met NodeJS gedaan, of heb je een framwork of library gebruikt? -->
+### Creating experiments
 
-## Installatie
-<!-- Bij Instalatie staat hoe een andere developer aan jouw repo kan werken -->
+Users can create their own experiment in a form that is located in an aside that opens when users press the create experiment button on the homepage.
+With a POST route in express users have the option to POST the experiment name, description and some data for the experiment (this is still under development).
 
-## Bronnen
 
-## Licentie
-
-This project is licensed under the terms of the [MIT license](./LICENSE).
