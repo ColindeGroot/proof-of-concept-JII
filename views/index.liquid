@@ -79,64 +79,58 @@
 </main>
 
 <script type="module">
-  if ('fetch' in window && 'DOMParser' in window) {
 
-    // Als er ergens op de pagina een formulier wordt gesubmit..
-    // (We maken hier gebruik van Event Delegation)
-    document.addEventListener('submit', async function (event) {
+if ('fetch' in window && 'DOMParser' in window) {
 
-      // Hou in een variabele bij welk formulier dat was
-      const form = event.target;
+  document.addEventListener('submit', async function (event) {
 
-      if (!form.hasAttribute('data-enhanced')) return;
+    const form = event.target;
 
-      event.preventDefault();
+    if (!form.hasAttribute('data-enhanced')) return;
 
-      const submitButton = form.querySelector('button[type="submit"]');
-      const originalButtonText = submitButton.innerHTML;
+    event.preventDefault();
 
-      // Zet de button tijdelijk uit als hij aan het laden is en de post actief is
-      submitButton.disabled = true;
-      submitButton.innerHTML = 'Creating...';
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalText = submitButton.innerHTML;
 
-      // Verzamel form data samen met de geactiveerde button naam en waardes
-      const formData = new FormData(form);
-      if (event.submitter) {
-        formData.append(event.submitter.name, event.submitter.value);
-      }
+    submitButton.disabled = true;
+    submitButton.innerHTML = 'Creating...';
 
-      // Verander form data naar een object
-      const formObject = Object.fromEntries(formData.entries());
+    const formData = new FormData(form);
 
-      // Stuur form data als JSON naar de server 
-      const response = await fetch(form.action, {
-        method: form.method,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formObject)
-      });
+    if (event.submitter) {
+      formData.append(event.submitter.name, event.submitter.value);
+    }
 
-      if (!response.ok) { //error state
-        submitButton.innerHTML = 'Error!';
-        return;
-      }
+    // turn form object in normal js object ( [["name", "test"], ["description", "abc"]] -> { name: "test", description: "abc"} )
+    const formRes = Object.fromEntries(formData.entries());
 
-      // Toon succes state en herlaad pagina
-      submitButton.innerHTML = 'Experiment added!';
+    const response = await fetch(form.action, { // get the action in the form
+      method: form.method, //post
+      headers: {
+        'Content-Type': 'application/json', //send json
+        'Accept': 'application/json' // recieve json 
+      },
+      body: JSON.stringify(formRes)
+    });
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 2500);
-    })
-  };
-
-
-  window.lastUpdated = (function () {
-    const first = document.querySelector('.experiment-board article time');
-    return first ? new Date(first.textContent) : new Date();
-  })();
-
+    if (!response.ok) {
+      submitButton.innerHTML = 'Error!';
+      submitButton.disabled = false;
+      return;
+    }
+   
+    const { id: newId } = await response.json(); //await the id and convert to json
+   
+    submitButton.innerHTML = '✓ Created!';
+    setTimeout(() => {
+      window.location.href = `/experiment/${newId}`; //redirect to the new created page
+    }, 1500);
+  });
+}
 </script>
+
+
+
 
 {% render 'partials/footer.liquid'%}

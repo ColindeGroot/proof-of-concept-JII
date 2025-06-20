@@ -17,7 +17,7 @@ app.get('/', async (req, res) => {
     const experimentsResponse = await fetch('https://open-jii-api-mock.onrender.com/api/v1/experiments?status=published');
     const experimentsJSON = await experimentsResponse.json();
 
-    //
+
     const sort = req.query.sort === 'oldest' ? 'oldest' : 'recent';
 
     const experiments = experimentsJSON.sort((a, b) => {
@@ -53,30 +53,40 @@ app.get('/experiment/:id', async (req, res) => {
 });
 
 app.post('/create-experiment', async (req, res) => {
-  //Get data from the input fields and pass them to the POST 
   const { name, description, data } = req.body;
-  const postId = uuidv4(); //store in variable as we will use this as an filter in the render
-
-  const response = await fetch('https://open-jii-api-mock.onrender.com/api/v1/experiments', {
+  // ... maak payload en post naar je API ...
+  const apiRes = await fetch('https://open-jii-api-mock.onrender.com/api/v1/experiments', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      id: postId, //the endpoint requires a uuid to be able to search on id. Render doesnt assign a uuid by itself which is why we will be posting it  
+      id: uuidv4(),
       name,
       description,
       data,
       status: "published", // Setting everything on public for now since this is still in testing fase and all post should be directly visible for testing pruposes
       visibility: "public", // same thing for the others
       embargoIntervalDays: 0,
-      createdAt: (new Date()).toISOString(),  //doesn't get pushed otherwise
-      updatedAt: (new Date()).toISOString()
+      createdAt: (new Date()).toISOString(), 
+      updatedAt: (new Date()).toISOString()  
     })
   });
 
-    res.redirect(`/experiment/${postId}`); // redirect to the experiment we just created
+  if (!apiRes.ok) {
+    return res.status(apiRes.status).redirect('/');
+  }
 
+  const created = await apiRes.json();
+  const newId = created.id; // get id of the new created experiment
 
+  if (req.headers.accept && req.headers.accept.includes('application/json')) {
+    return res.json({ id: newId }); //send json to client side js
+    // we need the experiment id on the client side as well if we want to have the redirect to occur AFTER the user feedback
+    // if it's not supported the user will be redirected to the page without the enhanched feedback
+  }
+
+  res.redirect(`/experiment/${newId}`);
 });
+
 
 app.post('/experiment/:id/delete', async (req, res) => {
 

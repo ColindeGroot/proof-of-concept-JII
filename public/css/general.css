@@ -21,6 +21,7 @@ body {
     font-family: "Overpass", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     background-color: var(--blue-light);
 
+    min-height: 100vh;
     font-size: 0.8em;
 
     @media (min-width:500px) {
