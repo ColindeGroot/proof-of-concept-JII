@@ -22,10 +22,10 @@
     {% if experiments and experiments.size > 0 %}
     <div class="experiment-board">
       {% for experiment in experiments %}
-
+ 
       <article class="experiment">
         <h3>{{ experiment.name }}</h3>
-        <p>{{ experiment.description |  truncate: 250 }}</p>
+        <p>{{ experiment.description |  truncate: 250 }}</p> 
 
         <div class="experiment-times">
           <p><strong>Created: </strong>{{ experiment.createdAt | date:"%d-%m-%Y %H:%M" }}</p>
@@ -96,7 +96,7 @@ if ('fetch' in window && 'DOMParser' in window) {
     submitButton.disabled = true;
     submitButton.innerHTML = 'Creating...';
 
-    const formData = new FormData(form);
+    const formData = new FormData(form); // https://developer.mozilla.org/en-US/docs/Web/API/FormData
 
     if (event.submitter) {
       formData.append(event.submitter.name, event.submitter.value);
@@ -114,7 +114,7 @@ if ('fetch' in window && 'DOMParser' in window) {
       body: JSON.stringify(formRes)
     });
 
-    if (!response.ok) {
+    if (!response.ok) { // if posting fails give user an error
       submitButton.innerHTML = 'Error!';
       submitButton.disabled = false;
       return;
@@ -122,8 +122,9 @@ if ('fetch' in window && 'DOMParser' in window) {
    
     const { id: newId } = await response.json(); //await the id and convert to json
    
-    submitButton.innerHTML = '✓ Created!';
+    submitButton.innerHTML = '✓ Created!'; // if id is fetched give user feedback it worked
     setTimeout(() => {
+      //window.loaction.reload(); 
       window.location.href = `/experiment/${newId}`; //redirect to the new created page
     }, 1500);
   });
