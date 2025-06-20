@@ -64,7 +64,7 @@ const { id } = req.params;
 
 ### Accessibility
 
-I tried to make everything progresivly enchaned in order to make the website as accessable as possible. One of those feautres is the aside that opens when you press the create experiment "button".
+In this project, all core functionalities are progressively enhanced in order to make the website as accessable as possible. One of those feautres is the aside that opens when you press the create experiment "button".
 
 This button is an anchor tag which targets the aside. Then with css the aside wil be shown:
 ``` HTML
