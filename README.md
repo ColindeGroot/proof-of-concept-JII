@@ -124,6 +124,7 @@ Here a shorter version of the script:
   };
 
 ```
+
 ## How to use
 
 In order to work on this project or run it locally you must need to install node.
