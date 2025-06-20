@@ -55,12 +55,13 @@ app.get('/experiment/:id', async (req, res) => {
 app.post('/create-experiment', async (req, res) => {
   //Get data from the input fields and pass them to the POST 
   const { name, description, data } = req.body;
+  const postId = uuidv4(); //store in variable as we will use this as an filter in the render
 
   const response = await fetch('https://open-jii-api-mock.onrender.com/api/v1/experiments', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      id: uuidv4(), //render requires a uuid to be able to search on id. When posting the posted experiment doesnt get an 
+      id: postId, //the endpoint requires a uuid to be able to search on id. Render doesnt assign a uuid by itself which is why we will be posting it  
       name,
       description,
       data,
@@ -72,7 +73,7 @@ app.post('/create-experiment', async (req, res) => {
     })
   });
 
-  res.redirect('/experiments?newlyAdded=true');
+    res.redirect(`/experiment/${postId}`); // redirect to the experiment we just created
 
 
 });

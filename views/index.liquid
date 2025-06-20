@@ -117,6 +117,11 @@
         body: JSON.stringify(formObject)
       });
 
+      if (!response.ok) { //error state
+        submitButton.innerHTML = 'Error!';
+        return;
+      }
+
       // Toon succes state en herlaad pagina
       submitButton.innerHTML = 'Experiment added!';
 
