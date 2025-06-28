@@ -17,14 +17,13 @@ app.get('/', async (req, res) => {
     const experimentsResponse = await fetch('https://open-jii-api-mock.onrender.com/api/v1/experiments?status=published');
     const experimentsJSON = await experimentsResponse.json();
 
-
     const sort = req.query.sort === 'oldest' ? 'oldest' : 'recent';
 
     const experiments = experimentsJSON.sort((a, b) => {
       const dateA = new Date(a.createdAt);
       const dateB = new Date(b.createdAt);
       // recent = dateB - dateA
-      return sort === 'recent' ? dateB - dateA : dateA - dateB;
+      return sort === 'recent' ? dateB - dateA : dateA - dateB; //sort function most and least recent experiments based on creationdate
     });
 
     res.render('index.liquid', { experiments, sort });
@@ -41,10 +40,10 @@ app.get('/experiment/:id', async (req, res) => {
 
   const experimentData = await homeResponse.json();
 
-  let experimentColumns
+  let experimentColumns // create columns
 
-  if (experimentData.data) {
-    experimentColumns = experimentData.data.columns
+  if (experimentData.data) { // add data if the experiments contains data
+    experimentColumns = experimentData.data.columns // this prevents a experiment from returning null if experiments column doesnt contain data
   }
 
   // console.log(experimentColumns) 
@@ -91,7 +90,7 @@ app.post('/create-experiment', async (req, res) => {
 app.post('/experiment/:id/delete', async (req, res) => {
 
   const { id } = req.params;
-  const response = await fetch(
+  await fetch(
     `https://open-jii-api-mock.onrender.com/api/v1/experiments/${id}`,
     { method: 'DELETE' }
   );
