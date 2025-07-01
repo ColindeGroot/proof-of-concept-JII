@@ -1,5 +1,6 @@
 @import url('general.css');
 
+  
 
 .intro-title {
     color: var(--dark-green);
@@ -127,7 +128,6 @@ form in the aside
 
     }
 
-
 }
 
 @media (min-width:1400px) {
@@ -214,3 +214,4 @@ form in the aside
     }
 
 }
+

@@ -1,7 +1,7 @@
 {% render 'partials/header.liquid' %}
 
 {% render 'partials/aside.liquid' %}
-<main id="main-content">
+<main id="main-content" style="view-transition-name: project-{{ experiment.id }}">
   <section class="experminets-layout">
 
     <h1 class="intro-title">Experiments overview</h1>
@@ -23,7 +23,7 @@
     <div class="experiment-board">
       {% for experiment in experiments %}
  
-      <article class="experiment">
+      <article class="experiment" >
         <h3>{{ experiment.name }}</h3>
         <p>{{ experiment.description |  truncate: 250 }}</p> 
 
@@ -129,6 +129,20 @@ if ('fetch' in window && 'DOMParser' in window) {
     }, 1500);
   });
 }
+
+//view transistion
+// the script is needed because redirect has its own transition which needs to be overwritten
+// document.querySelectorAll('.experiment-link').forEach(link => {
+//   link.addEventListener('click', e => {
+//     e.preventDefault();
+//     const href = link.href;
+//     document.startViewTransition(() => {
+//       window.location.href = href;
+//     });
+//   });
+// });
+
+
 </script>
 
 
