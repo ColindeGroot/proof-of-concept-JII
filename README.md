@@ -125,6 +125,12 @@ Here a shorter version of the script:
 
 ```
 
+## Designchoices
+
+This project follows the provided colors, fonts and other relevenat styling which can be seen in the client’s brandbook. The design is rather simple and calm which aims to create a professional interface for the users to interact with.
+
+The layout is based on a responsive grid system to ensure the platform remains usable across devices. The dashboard contains as few elements as possible and certain elements will only be visible on user interaction like the form to create experiments. This ensures that the dashboard is easy to use for all users.
+
 ## How to use
 
 In order to work on this project or run it locally you must need to install node.
