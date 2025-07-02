@@ -8,7 +8,7 @@
 
     <div class="experiment-options">
       <form class="filters" id="sort-form" method="GET" action="/">
-        <label for="sort">Sort:</label>
+        <label class="sort-label" for="sort">Sort:</label>
         <select id="sort" name="sort" onchange="this.form.submit()">
           <option value="recent" {% if sort=='recent' %}selected{% endif %}>Most recent</option>
           <option value="oldest" {% if sort=='oldest' %}selected{% endif %}>Least recent</option>

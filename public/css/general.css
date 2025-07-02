@@ -250,13 +250,17 @@ button,
     font-weight: bold;
     font-size: inherit;
 
-    padding: 0.75em 2em;
+    padding: 0.75em 0.5em;
     color: var(--white);
     border-radius: 5px;
     border: 2px solid var(--dark-green);
     background-color: var(--dark-green);
 
     transition: all 0.3s ease-in-out;
+
+    @media (min-width:500px) {
+        padding: 0.75em 2em;
+    }
 
     &:hover,
     &:focus {
