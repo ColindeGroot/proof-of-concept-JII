@@ -30,7 +30,8 @@
 
             <div class="post-group">
                 <label for="columns">Data </label>
-                <input type="text" name="columns" placeholder='[{"name":"col1","type_name":"string","type_text":"..."}]'>
+                <input type="text" name="columns"
+                    placeholder='[{"name":"col1","type_name":"string","type_text":"..."}]'>
             </div>
 
             <button class="post-button button-dark" type="submit" value="Create">Create experiment</button>
@@ -41,35 +42,33 @@
 
 <style>
     #post-form:target {
-        left: 0;
+        transform: translateX(0);
+        transition: left 0.4s ease-in-out;
+    }
 
-        @media (min-width:800px){
-            ~main {
-                margin-left: 40vw;
-                transition: margin-left 0.2s ease-in-out, filter 0.3s ease;
-            }
-        }
-
+    #post-form:target~main {
+        margin-left: 40vw;
+        transition: margin-left 0.2s ease-in-out, filter 0.3s ease;
     }
 
     aside {
-        z-index: 999;
         position: fixed;
         top: 0;
-        left: -100%;
-        width: 100%;
-        padding: 0 5em;
-        min-width: 0;
+        transform: translateX(-100%);
+        width: 100vw;
         height: 100%;
         background: var(--dark-green);
         box-shadow: 2px 0 10px var(--black);
+        z-index: 999;
+        transition: left 0.4s ease-in-out;
+    }
 
-        transition: 0.4s all ease-in-out;
-
-        @media (min-width:750px) {
+    @media (min-width: 750px) {
+        aside {
             width: 30vw;
         }
     }
+
 
     .close-button {
         position: absolute;
