@@ -22,10 +22,10 @@
     {% if experiments and experiments.size > 0 %}
     <div class="experiment-board">
       {% for experiment in experiments %}
- 
-      <article class="experiment" >
+
+      <article class="experiment">
         <h3>{{ experiment.name }}</h3>
-        <p>{{ experiment.description |  truncate: 250 }}</p> 
+        <p>{{ experiment.description | truncate: 250 }}</p>
 
         <div class="experiment-times">
           <p><strong>Created: </strong>{{ experiment.createdAt | date:"%d-%m-%Y %H:%M" }}</p>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="experiment-buttons">
-          <a class="experiment-link" href="/experiment/{{ experiment.id }}">See more</a>
+          <a class="experiment-link" href="/experiment/{{ experiment.id }}">See Project</a>
 
           <form action="/experiment/{{ experiment.id }}/delete" method="POST" class="delete-home">
             <button type="submit" class="delete-button">Delete
@@ -80,67 +80,56 @@
 
 <script type="module">
 
-if ('fetch' in window && 'DOMParser' in window) {
 
-  document.addEventListener('submit', async function (event) {
+  if ('fetch' in window && 'DOMParser' in window) {
 
-    const form = event.target;
+    document.addEventListener('submit', async function (event) {
 
-    if (!form.hasAttribute('data-enhanced')) return;
+      const form = event.target;
 
-    event.preventDefault();
+      if (!form.hasAttribute('data-enhanced')) return;
 
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalText = submitButton.innerHTML;
+      event.preventDefault();
 
-    submitButton.disabled = true;
-    submitButton.innerHTML = 'Creating...';
+      const submitButton = form.querySelector('button[type="submit"]');
+      const originalText = submitButton.innerHTML;
 
-    const formData = new FormData(form); // https://developer.mozilla.org/en-US/docs/Web/API/FormData
+      submitButton.disabled = true;
+      submitButton.innerHTML = 'Creating...';
 
-    if (event.submitter) {
-      formData.append(event.submitter.name, event.submitter.value);
-    }
+      const formData = new FormData(form); // https://developer.mozilla.org/en-US/docs/Web/API/FormData
 
-    // turn form object in normal js object ( [["name", "test"], ["description", "abc"]] -> { name: "test", description: "abc"} )
-    const formRes = Object.fromEntries(formData.entries());
+      if (event.submitter) {
+        formData.append(event.submitter.name, event.submitter.value);
+      }
 
-    const response = await fetch(form.action, { // get the action in the form
-      method: form.method, //post
-      headers: {
-        'Content-Type': 'application/json', //send json
-        'Accept': 'application/json' // recieve json 
-      },
-      body: JSON.stringify(formRes)
+      // turn form object in normal js object ( [["name", "test"], ["description", "abc"]] -> { name: "test", description: "abc"} )
+      const formRes = Object.fromEntries(formData.entries());
+
+      const response = await fetch(form.action, { // get the action in the form
+        method: form.method, //post
+        headers: {
+          'Content-Type': 'application/json', //send json
+          'Accept': 'application/json' // recieve json 
+        },
+        body: JSON.stringify(formRes)
+      });
+
+      if (!response.ok) { // if posting fails give user an error
+        submitButton.innerHTML = 'Error!';
+        submitButton.disabled = false;
+        return;
+      }
+
+      const { id: newId } = await response.json(); //await the id and convert to json
+
+      submitButton.innerHTML = '✓ Created!'; // if id is fetched give user feedback it worked
+      setTimeout(() => {
+        //window.location.reload(); 
+        window.location.href = `/experiment/${newId}`; //redirect to the new created page
+      }, 1500);
     });
-
-    if (!response.ok) { // if posting fails give user an error
-      submitButton.innerHTML = 'Error!';
-      submitButton.disabled = false;
-      return;
-    }
-   
-    const { id: newId } = await response.json(); //await the id and convert to json
-   
-    submitButton.innerHTML = '✓ Created!'; // if id is fetched give user feedback it worked
-    setTimeout(() => {
-      //window.loaction.reload(); 
-      window.location.href = `/experiment/${newId}`; //redirect to the new created page
-    }, 1500);
-  });
-}
-
-//view transistion
-// the script is needed because redirect has its own transition which needs to be overwritten
-// document.querySelectorAll('.experiment-link').forEach(link => {
-//   link.addEventListener('click', e => {
-//     e.preventDefault();
-//     const href = link.href;
-//     document.startViewTransition(() => {
-//       window.location.href = href;
-//     });
-//   });
-// });
+  }
 
 
 </script>
